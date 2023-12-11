@@ -1,1 +1,1 @@
-# Parallelization-FFT-and-Fractals-
+# Parallelization (FFT and Fractals)

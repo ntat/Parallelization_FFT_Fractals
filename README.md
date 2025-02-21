@@ -17,7 +17,7 @@ Here, we will look into two algorithms: 1) the Fast Fourier Transform (non-embar
 ## 2. Parallel Fast Fourier Transform (FFT) using MPI
 
 ## Overview
-This project implements the FFT using parallel processing with MPI (Message Passing Interface) and the Bit Reversal technique. The purpose of the project is to benchmark the method against the non-parallel version of it. The algorithm will generate a random input sequence of length $N$ (user defined) that must be a power of two, and then it will calculate its FFT. The FFT algorithm has a time complexity of $O(N \log N)$ 
+This project implements the Binary Exchange FFT using parallel processing with MPI (Message Passing Interface) and the Bit Reversal technique. The purpose of the project is to benchmark the method against the non-parallel version of it. The algorithm will generate a random sequence of numbers of length $N$ (user defined) that must be a power of two, and then it will calculate its FFT. The FFT algorithm has a time complexity of $O(N \log N)$ 
 
 ## Prerequisites
 You need the following installed:
@@ -31,10 +31,10 @@ You need the following installed:
 2. Compile using `mpicc`:
    ```bash 
    mpicc -o myfft fft_final.c 
-3. Run the program with `mpirun`, specifying the number of processes (`-np`):
+3. Run the program with `mpirun`, specifying the number of processes (`-np`), which _must_ be a power of two:
    ```bash 
    mpirun -np <num_processes> myfft <N> <debugMode> <printResults>
- - `N` (integer): Input size (must be a power of two).
+ - `N` (integer): Input size (_must_ be a power of two).
  - `debugMode` (0/1): If `1`, saves the FFT input to `InputFFT.txt`
  - `printResults` (0/1): If `1`, saves the FFT output (in correct order / not bit flipped) to `OutputFFT.txt`
 4. Example:
@@ -43,7 +43,7 @@ You need the following installed:
 This will calculate the FFT on 4 processes, and it will return the randomly generated sequence of length N=1024, as well as its FFT calculation in case you need it.
 
 ## Results
-Results are compiled from an Intel Xeon Haswell-based cluster. 
+Results compiled on an Intel Xeon Haswell-based cluster. 
 <p  align="center">  
 <img  src="assets/speedup.png"  width="300"  style="display:inline-block; margin-right: 10px"/>  
 <img src="assets/effic.png"  width="300"  style="display:inline-block; margin-left: 10px"/>  

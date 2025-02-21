@@ -14,7 +14,7 @@ In parallel computing, problems are often categorized based on how easily they c
 
 Here, we will look into two algorithms: 1) the Fast Fourier Transform (non-embarrassingly parallel) and 2) Mandelbrot set calculation (embarrassingly parallel).
 
-## Parallel Fast Fourier Transform (FFT) using MPI
+## 2. Parallel Fast Fourier Transform (FFT) using MPI
 
 ## Overview
 This project implements the FFT using parallel processing with MPI (Message Passing Interface) and the Bit Reversal technique. The purpose of the project is to benchmark the method against the non-parallel version of it. The algorithm will generate a random input sequence of length $N$ (user defined) that must be a power of two, and then it will calculate its FFT. The FFT algorithm has a time complexity of $O(N \log N)$ 
@@ -43,3 +43,12 @@ You need the following installed:
 This will calculate the FFT on 4 processes, and it will return the randomly generated sequence of length N=1024, as well as its FFT calculation in case you need it.
 
 ## Results
+Results are compiled from an Intel Xeon Haswell-based cluster. 
+<p  align="center">  
+<img  src="assets/speedup.png"  width="300"  style="display:inline-block; margin-right: 10px"/>  
+<img src="assets/effic.png"  width="300"  style="display:inline-block; margin-left: 10px"/>  
+</p>
+
+<p  align="center">  
+<img  src="assets/tables.png"  style="display:inline-block; margin-right: 10px"/>  
+</p>

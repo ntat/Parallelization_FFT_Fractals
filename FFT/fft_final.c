@@ -92,6 +92,7 @@ double start, finish;
     {
       if (rank==0)
       dispInfo();
+      fclose(file);
       remove("InputFFT.txt");
       MPI_Finalize();
       return 0;
@@ -124,6 +125,7 @@ if(dgbMode)
 
   else
    {
+    fclose(file);
     remove("InputFFT.txt");
       for (int i = 0; i < currData; i++)
       {
@@ -165,6 +167,7 @@ if (printRes)
       {
        fprintf(fout,"y[%d] = %lf + %lf*i\n", j, creal(resultRev[j]), cimag(resultRev[j]));
       }
+      fclose(fout);
     }//rank==0
 }//printRes
 

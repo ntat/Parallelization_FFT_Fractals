@@ -50,19 +50,19 @@ double start, finish;
     /* No choices = default settings. */
     if (argc == 4) 
     {
-      int fo,foo,oof;
+      int fftSize,debugMode,printOutput;
 
-      fo  = atoi(argv[1]);
-      foo = atoi(argv[2]);
-      oof = atoi(argv[3]);
+      fftSize  = atoi(argv[1]);
+      debugMode = atoi(argv[2]);
+      printOutput = atoi(argv[3]);
 
       /* Set the number (globally) of points to calculate the fft. */
-      N=fo;
+      N=fftSize;
 
-      if (foo==1)
+      if (debugMode==1)
       dgbMode = true;
 
-      if (oof==1)
+      if (printOutput==1)
       printRes= true;
     }
     else
@@ -117,7 +117,7 @@ if(dgbMode)
       }
       /* Wait all processes to come to this point. */
       /* Write data to disk. */
-      int MPI_Barrier(MPI_Comm comm);
+      MPI_Barrier(MPI_COMM_WORLD);
       saveDisk(rank, currData, size, barr, file);
       free(barr);
   }
@@ -137,7 +137,7 @@ if(dgbMode)
 
     resultRev = (double complex *) malloc(sizeof(double complex)*N);
     /* Wait all processes to come to this point.*/
-    int MPI_Barrier(MPI_Comm comm);
+    MPI_Barrier(MPI_COMM_WORLD);
     start=MPI_Wtime(); /*start timer*/
     fft(arr, y, rank, size);
 

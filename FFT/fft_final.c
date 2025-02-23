@@ -295,28 +295,43 @@ unsigned int FlipBit(unsigned int n, unsigned int bits)
 
 void communicate(int splitPoint, int dataChunk, int rank, double complex * S, double complex * Sk)
 {
+    int destination, source;
+    int err;  // Variable to capture error codes from MPI functions
 
-  int destination;
-  int source;
-
-
-  if( ( rank % (splitPoint*2) ) < splitPoint)
-      {
+    if ((rank % (splitPoint * 2)) < splitPoint)
+    {
         /* My rank is < than the one that i have to communicate with. */
+        /* This process sends S and receives into Sk. */
         destination = source = rank + splitPoint;
-        MPI_Sendrecv(S, dataChunk, MPI_C_DOUBLE_COMPLEX, destination, 0,
-                     Sk, dataChunk, MPI_C_DOUBLE_COMPLEX,  source, 0,
-                       MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-      }
-      else
-      {
+        err = MPI_Sendrecv(S, dataChunk, MPI_C_DOUBLE_COMPLEX, destination, 0,
+                             Sk, dataChunk, MPI_C_DOUBLE_COMPLEX, source, 0,
+                             MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        if (err != MPI_SUCCESS)
+        {
+            char error_string[BUFSIZ];
+            int length_of_error_string;
+            MPI_Error_string(err, error_string, &length_of_error_string);
+            printf("MPI Error in Sendrecv (rank %d): %s\n", rank, error_string);
+            MPI_Abort(MPI_COMM_WORLD, err);
+        }
+    }
+    else
+    {
         /* My rank is > than the one that i have to communicate with. */
+        /* This process sends Sk and receives into S. */
         destination = source = rank - splitPoint;
-        MPI_Sendrecv(Sk, dataChunk, MPI_C_DOUBLE_COMPLEX, destination, 0,
-                   S, dataChunk, MPI_C_DOUBLE_COMPLEX,  source, 0,
-                       MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-      
-      }
+        err = MPI_Sendrecv(Sk, dataChunk, MPI_C_DOUBLE_COMPLEX, destination, 0,
+                             S, dataChunk, MPI_C_DOUBLE_COMPLEX, source, 0,
+                             MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        if (err != MPI_SUCCESS)
+        {
+            char error_string[BUFSIZ];
+            int length_of_error_string;
+            MPI_Error_string(err, error_string, &length_of_error_string);
+            printf("MPI Error in Sendrecv (rank %d): %s\n", rank, error_string);
+            MPI_Abort(MPI_COMM_WORLD, err);
+        }
+    }
 }
 
 

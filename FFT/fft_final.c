@@ -112,7 +112,7 @@ if(dgbMode)
 
      for (int i = 0; i < currData; i++)
       {
-         z=rand() % 40 - 20;
+         z=((double)rand() / RAND_MAX) * 40.0 - 20.0; //rand() % 40 - 20;
          arr[i]=z;
          barr[i]=z;
       }
@@ -129,7 +129,7 @@ if(dgbMode)
     remove("InputFFT.txt");
       for (int i = 0; i < currData; i++)
       {
-         z=rand() % 40 - 20;
+         z=((double)rand() / RAND_MAX) * 40.0 - 20.0; //rand() % 40 - 20;
          arr[i]=z;
       }
    }
@@ -165,7 +165,8 @@ if (printRes)
 
       for( j = 0; j < N; j++)
       {
-       fprintf(fout,"y[%d] = %lf + %lf*i\n", j, creal(resultRev[j]), cimag(resultRev[j]));
+       fprintf(fout, "y[%d] = %lf %s %lf*i\n", j, creal(resultRev[j]), 
+        (cimag(resultRev[j]) >= 0) ? "+" : "-", fabs(cimag(resultRev[j])));
       }
       fclose(fout);
     }//rank==0
@@ -239,7 +240,7 @@ void fft(double complex * R,double complex * y, int rank, int size)
 
       /* Compute the twiddle factor. */
       int expFactor = bitFlip(i, nbits, m);
-      R[l] = S[j] + Sk[k] * cexp( (2*PI*I*expFactor)/N );
+      R[l] = S[j] + Sk[k] * cexp( (-2*PI*I*expFactor)/N );
     }
   }
 

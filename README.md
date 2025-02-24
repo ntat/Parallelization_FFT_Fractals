@@ -17,7 +17,7 @@ Here, we will look into two algorithms: 1) the Fast Fourier Transform (non-embar
 ## 2. Parallel Fast Fourier Transform (FFT) using MPI
 
 ## Overview
-This project implements the Binary Exchange FFT using parallel processing with MPI (Message Passing Interface) and the Bit Reversal technique. The purpose of the project is to benchmark the method against the non-parallel version of it. The algorithm will generate a random sequence of numbers of length $N$ (user defined) that must be a power of two, and then it will calculate its FFT. The FFT algorithm has a time complexity of $O(N \log N)$ 
+This project implements the forward Binary Exchange FFT using parallel processing with MPI (Message Passing Interface) and the Bit Reversal technique. The purpose of the project is to benchmark the method against the non-parallel version of it. The algorithm will generate a random sequence of numbers $\in \mathbb{R}$, of length $N$ (user defined) that must be a power of two, and then it will calculate its FFT. The FFT algorithm has a time complexity of $O(N \log N)$ 
 
 ## Prerequisites
 You need the following installed:
@@ -30,7 +30,7 @@ You need the following installed:
    cd FFT
 2. Compile using `mpicc`:
    ```bash 
-   mpicc -o myfft fft_final.c 
+   mpicc -o myfft fft_final.c -lm 
 3. Run the program with `mpirun`, specifying the number of processes (`-np`), which _must_ be a power of two:
    ```bash 
    mpirun -np <num_processes> myfft <N> <debugMode> <printResults>

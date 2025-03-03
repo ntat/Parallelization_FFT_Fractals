@@ -86,11 +86,12 @@ You need the following installed:
    ```
 
 ## Results
+The first picture corresponds to the projection on the imaginary plane of the total region of the Mandelbrot Set. Second picture corresponds to the same projection but zoomed around (coordinates: 1291, 1860). Third picture is taken by further zooming around the center of the spiral dome of the second picture (coordinates: 945, 1866). 
 <p  align="center">  
-<img  src="assets/original.jpg "  width="300"  style="display:inline-block; margin-right: 10px"/>  
-<img src="assets/zoom_1.jpg"  width="300"  style="display:inline-block; margin-left: 10px"/>  
+<img  src="assets/original.jpg" width="300"  style="display:inline-block; margin-right: 10px"/>  
 </p>
 
 <p  align="center">  
-<img  src="assets/zoom_2x.jpg" width="300"  style="display:inline-block; margin-right: 10px"/>  
+<img  src="assets/zoom_1.jpg "  width="300"  style="display:inline-block; margin-right: 10px"/>  
+<img src="assets/zoom_2x.jpg"  width="300"  style="display:inline-block; margin-left: 10px"/>  
 </p>

@@ -57,4 +57,40 @@ Results compiled on an Intel Xeon Haswell-based cluster.
 <img  src="assets/tables.png"  style="display:inline-block; margin-right: 10px"/>  
 </p>
 
-## 1. Parallel Mandelbrot set using MPI
+## 2. Parallel Mandelbrot Set using MPI
+
+## Prerequisites
+You need the following installed:
+- **MPI Library** (e.g. OpenMPI)
+- **GCC or Clang** with MPI support
+## Installation , Compilation & Usage
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/ntat/Parallelization_FFT_Fractals.git
+   cd Fractals_Mandelbrot_Set
+   ```
+2. Compile using `mpicc`:
+   ```bash 
+   mpicc -o TODO -lm
+   ``` 
+3. Run the program with `mpirun`, specifying the number of processes (`-np`):
+   ```bash 
+   mpirun -np <num_processes> TODO
+   ```
+ - `X` TODO
+ - `XX` TODO
+ - `XXX` TODO
+4. Example:
+   ```bash 
+   mpirun -np 4 TODO
+   ```
+
+## Results
+<p  align="center">  
+<img  src="assets/original.jpg "  width="300"  style="display:inline-block; margin-right: 10px"/>  
+<img src="assets/zoom_1.jpg"  width="300"  style="display:inline-block; margin-left: 10px"/>  
+</p>
+
+<p  align="center">  
+<img  src="assets/zoom_2.jpg"  style="display:inline-block; margin-right: 10px"/>  
+</p>

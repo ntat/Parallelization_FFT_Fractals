@@ -92,5 +92,5 @@ You need the following installed:
 </p>
 
 <p  align="center">  
-<img  src="assets/zoom_2x.jpg"  style="display:inline-block; margin-right: 10px"/>  
+<img  src="assets/zoom_2x.jpg" width="300"  style="display:inline-block; margin-right: 10px"/>  
 </p>

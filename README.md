@@ -74,7 +74,7 @@ where:
 - The iteration continues until either
 
 $$
-|z_n| \geq 2
+\lvert z_n \rvert \geq 2
 $$
 
 (indicating divergence) or a maximum number of iterations $N$ is reached.

@@ -77,9 +77,9 @@ You need the following installed:
    ```bash 
    mpirun -np 4 mandelbrot <x> <y> <zoom_factor>
    ```
- - `x` X Pixel Coordinate
- - `y` Y Pixel Coordinate
- - `zoom_factor` How many pixels around the chosen center (X,Y) will define the zoom window. 
+ - `x`: X Pixel Coordinate
+ - `y`: Y Pixel Coordinate
+ - `zoom_factor`: How many pixels around the chosen center (X,Y) will define the zoom window. 
 4. Example (this will zoom into the region centered around pixel (1291, 1860), with a zoom factor of 5:
    ```bash 
    mpirun -np 4 mandelbrot 1291 1860 5

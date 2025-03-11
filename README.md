@@ -71,19 +71,20 @@ You need the following installed:
    ```
 2. Compile using `mpicc`:
    ```bash 
-   mpicc -o TODO -lm
+   mpicc -o mandelbrot mandelbrot.c -lm
    ``` 
 3. Run the program with `mpirun`, specifying the number of processes (`-np`):
    ```bash 
-   mpirun -np <num_processes> TODO
+   mpirun -np 4 mandelbrot <x> <y> <zoom_factor>
    ```
- - `X` TODO
- - `XX` TODO
- - `XXX` TODO
-4. Example:
+ - `x` X Pixel Coordinate
+ - `y` Y Pixel Coordinate
+ - `zoom_factor` How many pixels around the chosen center (X,Y) will define the zoom window. 
+4. Example (this will zoom into the region centered around pixel (1291, 1860), with a zoom factor of 5:
    ```bash 
-   mpirun -np 4 TODO
+   mpirun -np 4 mandelbrot 1291 1860 5
    ```
+To get the original mandelbrot in the default boundaries: `mpirun -np 4 mandelbrot`
 
 ## Results
 The first picture corresponds to the projection on the imaginary plane of the total region of the Mandelbrot Set. Second picture corresponds to the same projection but zoomed around (coordinates: 1291, 1860). Third picture is taken by further zooming around the center of the spiral dome of the second picture (coordinates: 945, 1866). 

@@ -71,7 +71,7 @@ where:
 
 - $c \in \mathbb{C}$, represents a point in the complex plane (mapped from a pixel),
 - $z_0 = 0$,
-- The iteration continues until either $|z_n| \geq 2$ (indicating divergence) or a maximum number of iterations $N$ is reached.
+- The iteration continues until either $\vert z_n \vert \geq 2$ (indicating divergence) or a maximum number of iterations $N$ is reached.
 
 For each pixel corresponding to the complex number $c$, the algorithm computes the number of iterations $k$ required for divergence (or $k = N$ if the sequence does not diverge). This iteration count is then used to determine the pixel's color.
 

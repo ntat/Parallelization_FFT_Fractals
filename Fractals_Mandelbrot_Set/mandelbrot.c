@@ -66,17 +66,33 @@ int main(int argc, char **argv)
     int rank, size, tag, rc, i;
     MPI_Status status;
 
-    //Initialize MPI
-    rc = MPI_Init(&argc, &argv);
-    rc = MPI_Comm_size(MPI_COMM_WORLD, &size);
-    rc = MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    // Initialize MPI
+    if ((rc = MPI_Init(&argc, &argv)) != MPI_SUCCESS) {
+        fprintf(stderr, "Error: MPI_Init failed with error code %d.\n", rc);
+        MPI_Abort(MPI_COMM_WORLD, rc);
+        exit(EXIT_FAILURE);
+    }
+
+    // Get the number of processes and check for errors
+    if ((rc = MPI_Comm_size(MPI_COMM_WORLD, &size)) != MPI_SUCCESS) {
+        fprintf(stderr, "Error: MPI_Comm_size failed with error code %d.\n", rc);
+        MPI_Abort(MPI_COMM_WORLD, rc);
+        exit(EXIT_FAILURE);
+    }
+
+    // Get the rank of the current process and check for errors
+    if ((rc = MPI_Comm_rank(MPI_COMM_WORLD, &rank)) != MPI_SUCCESS) {
+        fprintf(stderr, "Error: MPI_Comm_rank failed with error code %d.\n", rc);
+        MPI_Abort(MPI_COMM_WORLD, rc);
+        exit(EXIT_FAILURE);
+    }
 
     tag = 132;
 
     int N = 1024; 
     int b = 2;
 
-    if((fp=fopen("test", "wb"))==NULL) {
+    if((fp=fopen("result.bin", "wb"))==NULL) {
     printf("Cannot open file.\n");
     }
 
@@ -118,12 +134,12 @@ int main(int argc, char **argv)
 
     int **temp = makeArray(wp, hp);
 
-    for ( x = 0; x < wp; x++)
+    for (x = 0; x < wp; x++)
 
     {
         dreal=(x+xoff)*dx + newMinRe;
 
-        for ( y = 0; y < h; y++)
+        for (y = 0; y < h; y++)
         {
             dimag=(y+yoff)*dy + newMinIm;
 
@@ -143,11 +159,11 @@ printf("I am process #%d\n", rank);
         int **img = makeArray(w, h);
           // Firstly, insert results of 0th master
           // process elements into the final image.
-        for ( s = 0; s < wp; s++)
+        for (s = 0; s < wp; s++)
 
                 {
                     
-                    for ( r = 0; r < h; r++)
+                    for (r = 0; r < h; r++)
                     {
                         img[s][r]=temp[s][r];
                     }
@@ -160,7 +176,7 @@ printf("I am process #%d\n", rank);
             rc = MPI_Recv(&temp[0][0], wp*hp, MPI_INT, i, tag, MPI_COMM_WORLD, &status);
 
             int cnt=0;
-            for ( k = i*wp; k < (i+1)*wp; k++)
+            for (k = i*wp; k < (i+1)*wp; k++)
 
                 {
                     
@@ -177,7 +193,7 @@ printf("I am process #%d\n", rank);
         freeArray(temp);
         int i,j;
         //Write output in binary format (readable by matlab).
-        for ( i = 0; i < w; i++)
+        for (i = 0; i < w; i++)
         {
             for (j = 0; j < h; j++)
             {
@@ -193,13 +209,13 @@ printf("I am process #%d\n", rank);
     else
     {
         //Send subMatrices to master
-        rc = MPI_Send(&temp[0][0], wp*hp, MPI_INT, 0, tag, MPI_COMM_WORLD);
+        MPI_Send(&temp[0][0], wp*hp, MPI_INT, 0, tag, MPI_COMM_WORLD);
         freeArray(temp);
     }
 
 
     //Finish Session
-    rc = MPI_Finalize();
+    MPI_Finalize();
    return 0;
 }
 

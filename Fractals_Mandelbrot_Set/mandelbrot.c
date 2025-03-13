@@ -57,7 +57,7 @@ int count(double complex d, int b, int N);
 // Factor controls how big is the area.
 void cordTransZoom(int x_0, int y_0, int factor);
 
-main(int argc, char **argv)
+int main(int argc, char **argv)
 {
 
     FILE *fp;

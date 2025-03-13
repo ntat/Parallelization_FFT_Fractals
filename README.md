@@ -126,7 +126,7 @@ $$
 w_p = \frac{w}{P} \quad \text{columns}.
 $$
 
-After each process computes its submatrix of iteration counts, the results are gathered by the master process to form the complete image. The image is then written to a binary file, which can then be visualized using Python or something like MATLAB.
+After each process computes its submatrix of iteration counts, the results are gathered by the master process to form the complete image. The image is then written to a binary file, which can then be visualized using a Python [script](Fractals_Mandelbrot_Set/plot.py) or a MATLAB [script](Fractals_Mandelbrot_Set/plot_matlab.m) etc.
 
 
 ## Prerequisites

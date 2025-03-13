@@ -1,7 +1,7 @@
 clear all
 %close all
 clc
-fid = fopen('test', 'r')
+fid = fopen('result.bin', 'r')
 zm = fread(fid, 'int32');
 A = reshape(zm,4096,4096);
 imagesc(log(A))

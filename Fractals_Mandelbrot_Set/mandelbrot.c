@@ -200,7 +200,7 @@ printf("I am process #%d\n", rank);
 
     //Finish Session
     rc = MPI_Finalize();
-
+   return 0;
 }
 
 // Evaluate Mandelbrot function and
